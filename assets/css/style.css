@@ -623,7 +623,6 @@ img{
     margin: 0 0 10px;
 }
 
-
 .about-section .skills .skill-item .progress{
     height: 20px;
     border-radius: 10px;
@@ -638,7 +637,6 @@ img{
     position: absolute;
     border-radius: 10px;
 }
-
 
 .about-section .skills .skill-item .progress-bar span{
     position: absolute;
@@ -880,10 +878,10 @@ img{
 
 .portfolio-section .portfolio-item{
     flex: 0 0 33.33%;
-     max-width: 33.33%;
-     padding: 15px;
-     display: flex;
-     flex-wrap: wrap;
+    max-width: 33.33%;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
 }
 .portfolio-section .portfolio-item-inner{
     padding: 15px;
