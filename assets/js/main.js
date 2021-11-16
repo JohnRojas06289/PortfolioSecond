@@ -112,33 +112,31 @@
      let itemIndex, slideIndex, screenshots;
 
      /* filter portfolio items*/
-     filterContainer.addEventListener("click", (event)=>{
-       if(event.target.classList.contains("filter-item") && 
-       	!event.target.classList.contains("active")){
-       	 // deactivate existing active 'filter-item'
-       	 filterContainer.querySelector(".active").classList.remove("outer-shadow","active");
-       	 // activate new 'filter item'
-       	 event.target.classList.add("active","outer-shadow");
-       	 const target = event.target.getAttribute("data-target");
-       	 portfolioItems.forEach((item) =>{
-           if(target === item.getAttribute("data-category") || target === 'all'){
-           	  item.classList.remove("hide");
-           	  item.classList.add("show");
-           }
-           else{
-           	  item.classList.remove("show");
-           	  item.classList.add("hide");
-           }
-       	 }) 
-       }
-     })
+     filterContainer.addEventListener('click',(event)=>{
+      if (event.target.classList.contains('filter-item') &&  !event.target.classList.contains('active')) {
+      filterContainer.querySelector('.active').classList.remove('outer-shadow','active');
+      event.target.classList.add('active','outer-shadow');  
+      
+      const target = event.target.getAttribute('data-target');
+      portfolioItems.forEach((item)=>{
+        if (target===item.getAttribute('data-category') || target==='all') {
+          item.classList.remove('hide');
+          item.classList.add('show');
+        }
+        else{
+          item.classList.remove('show');
+          item.classList.add('hide')
+        }
+      })
+    }
+  })
 
-     portfolioItemsContainer.addEventListener("click", (event) =>{
-     	if(event.target.closest(".portfolio-item-inner")){
-     	   const portfolioItem = event.target.closest(".portfolio-item-inner").parentElement;
+     portfolioItemsContainer.addEventListener('click', (event) =>{
+     	if(event.target.closest('.portfolio-item-inner')){
+     	   const portfolioItem = event.target.closest('.portfolio-item-inner').parentElement;
      	   // get the portfolioItem index
      	   itemIndex = Array.from(portfolioItem.parentElement.children).indexOf(portfolioItem);
-     	   screenshots = portfolioItems[itemIndex].querySelector(".portfolio-item-img img").getAttribute("data-screenshots");
+     	   screenshots = portfolioItems[itemIndex].querySelector('.portfolio-item-img img').getAttribute("data-screenshots");
      	   // convert screenshots into array
      	   screenshots = screenshots.split(",");
      	   if(screenshots.length === 1){
@@ -325,3 +323,19 @@ function updateTestimonial() {
   }
 }
 setInterval(updateTestimonial, 10000)
+
+// audio
+const audio = document.getElementById("audio");
+const playPause = document.getElementById("play");
+
+playPause.addEventListener("click", () => {
+  if (audio.paused || audio.ended) {
+    playPause.querySelector(".pause-btn").classList.toggle("hide");
+    playPause.querySelector(".play-btn").classList.toggle("hide");
+    audio.play();
+  } else {
+    audio.pause();
+    playPause.querySelector(".pause-btn").classList.toggle("hide");
+    playPause.querySelector(".play-btn").classList.toggle("hide");
+  }
+});

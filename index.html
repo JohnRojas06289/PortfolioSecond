@@ -899,6 +899,7 @@
     <div class="style-switcher-toggler s-icon outer-shadow hover-in-shadow">
        <i class="fas fa-cog fa-spin"></i>
     </div>
+
     <div class="day-night s-icon outer-shadow hover-in-shadow">
        <i class="fas fa-moon"></i>
     </div>
@@ -915,13 +916,31 @@
       <i class="fas fa-music"></i>
    </div>
    <h4>Songs</h4>
-    <div class="songs">
-      <div class="pp-prev"><i class="fas fa-play"></i></div>
-      <div class="pp-next"><i class="fas fa-pause"></i></div>
-      <div class="pp-next"><i class="fas fa-play"></i></div>
+   <div class="songs">
+    <div class="player">
+      <audio class="player__audio" controls id="audio">
+        <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/308622/Leo%20-%20Trying.mp3" type="audio/mpeg" />
+      </audio>
+  
+      <div class="player__controls">
+        <div class="player__btn player__btn--medium" id="backward">
+          <i class="fas fa-backward"></i>
+        </div>
+  
+        <div class="player__btn player__btn--medium bg-music play" id="play">
+          <i class="fas fa-play play-btn"></i>
+          <i class="fas fa-pause pause-btn hide"></i>
+        </div>
+  
+        <div class="player__btn player__btn--medium" id="forward">
+          <i class="fas fa-forward"></i>
+        </div>
+      </div>
     </div>
+  </div>
  </div>
  <!-- style switcher end -->
+
 
 
 <!-- main js -->
