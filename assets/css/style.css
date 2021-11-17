@@ -514,6 +514,7 @@ home section
    width: 100%;
    border-radius: 50%;
    border:10px solid transparent;
+   background-color: white;
 }
 
 /*----------------
@@ -536,6 +537,7 @@ about section
    width: 100%;
    border:10px solid transparent;
    border-radius: 5px;
+   background-color: white;
 }
 .about-section .about-img .social-links{
    margin-top:20px;
@@ -554,6 +556,7 @@ about section
 }
 .about-section .about-img .social-links a i{
    line-height: 40px;
+   font-size: 27px;
 }
 .about-section .about-img .social-links a:after{
    border-radius: 50%;
@@ -1278,14 +1281,17 @@ contact section
 }
 
 .testimonial-container {
-    color: var(--text-black-600);
-    border-radius: 15px;
-    margin: 20px auto;
-    padding: 50px 80px;
-    max-width: 768px;
-    position: relative;
+   background-color: var(--bg-black-50);
+   border-radius: 15px;
+   margin: 20px auto;
+   padding: 50px 80px;
+   max-width: 768px;
+   position: relative;
 }
-
+.testimonial-container p{
+   padding-bottom: 30px;
+   color: var(--text-black-600);
+}
 .fa-quote {
     color: var(--skin-color);
     font-size: 28px;
@@ -1320,11 +1326,13 @@ contact section
 }
 
 .user .user-details {
-    margin-left: 10px;
+    margin: 30px 0 0 40px;
 }
 
 .user .username {
     margin: 0;
+    color: var(--skin-color);
+    font-weight: bold;
 }
 
 .user .role {
