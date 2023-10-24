@@ -4,7 +4,7 @@ Este es mi portafolio personal en línea, donde muestro una colección de mis pr
 
 ## Vista previa
 
-Puedes visitar mi portafolio en [johnrojas0628.github.io](https://johnrojas0628.github.io/) para verlo en acción.
+Puedes visitar mi portafolio en [johnrojas0628.github.io](https://john-rojas.github.io/portfolio/) para verlo en acción.
 
 ## Características
 
@@ -20,7 +20,7 @@ Puedes visitar mi portafolio en [johnrojas0628.github.io](https://johnrojas0628.
 
 ## Contacto
 
-Si deseas ponerte en contacto conmigo, puedes hacerlo a través de mi [sitio web personal](https://johnrojas0628.github.io/contact.html) o [LinkedIn](https://www.linkedin.com/in/johnrojas0628/).
+Si deseas ponerte en contacto conmigo, puedes hacerlo a través de mi [sitio web personal](https://john-rojas.github.io/portfolio/) o [LinkedIn](www.linkedin.com/in/john-jairo-rojas-johnjdev).
 
 ¡Gracias por visitar mi portafolio!
 
