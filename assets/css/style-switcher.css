@@ -79,7 +79,6 @@
 	top:110px;
 }
 .style-switcher .songs{
-	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	justify-content: center;
