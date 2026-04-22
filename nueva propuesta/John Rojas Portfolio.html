@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>John J Rojas — Web Developer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+:root{--accent:#fb839e;--accent2:#a78bfa;--bg:#050510;--glass:rgba(255,255,255,.04);--gb:rgba(255,255,255,.08);--text:#e2e8f0;--muted:#94a3b8}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Raleway',sans-serif;overflow-x:hidden;line-height:1.6}
+.glass{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--gb);border-radius:16px}
+.grad-text{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.btn{padding:12px 28px;border-radius:30px;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;font-family:'Raleway',sans-serif;display:inline-flex;align-items:center;gap:8px;text-decoration:none;border:none}
+.btn-p{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 24px rgba(251,131,158,.3)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(251,131,158,.5)}
+.btn-g{background:transparent;border:1px solid rgba(251,131,158,.4);color:var(--accent)}
+.btn-g:hover{background:rgba(251,131,158,.08);box-shadow:0 0 20px rgba(251,131,158,.15)}
+.section{padding:100px 0;position:relative}
+.container{max-width:1140px;margin:auto;padding:0 30px}
+.s-sub{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.15em;display:block;margin-bottom:10px}
+.s-head{font-size:38px;font-weight:800;line-height:1.1}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+.nav{position:fixed;top:0;width:100%;z-index:200;padding:18px 0;transition:all .3s}
+.nav.scrolled{background:rgba(5,5,16,.92);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-inner{max-width:1140px;margin:auto;padding:0 30px;display:flex;align-items:center;justify-content:space-between}
+.logo{width:44px;height:44px;border-radius:50%;border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:var(--accent);text-decoration:none;box-shadow:0 0 18px rgba(251,131,158,.3);transition:all .3s;flex-shrink:0}
+.logo:hover{box-shadow:0 0 30px rgba(251,131,158,.6);transform:scale(1.06)}
+.nav-links{display:flex;gap:4px}
+.nav-links a{font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 16px;border-radius:20px;transition:all .3s;text-transform:capitalize}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);background:rgba(251,131,158,.08)}
+.prog-track{height:5px;border-radius:3px;background:rgba(255,255,255,.07)}
+.prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 0 10px rgba(251,131,158,.4);transition:width 1.4s cubic-bezier(.4,0,.2,1)}
+.inp{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 18px;font-size:15px;color:var(--text);font-family:'Raleway',sans-serif;outline:none;transition:border .3s,box-shadow .3s}
+.inp:focus{border-color:var(--accent);box-shadow:0 0 14px rgba(251,131,158,.15)}
+.inp::placeholder{color:var(--muted)}
+.chip{padding:6px 18px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:all .3s;border:1px solid rgba(255,255,255,.08);color:var(--muted);background:transparent;font-family:'Raleway',sans-serif}
+.chip.active{color:var(--accent);border-color:rgba(251,131,158,.4);background:rgba(251,131,158,.08)}
+.chip:hover:not(.active){border-color:rgba(255,255,255,.15);color:var(--text)}
+.tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(60px)}
+.proj-card{cursor:pointer;transition:transform .3s,box-shadow .3s}
+.proj-card:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(0,0,0,.5),0 0 30px rgba(251,131,158,.1)}
+.tweak-panel{position:fixed;bottom:20px;right:20px;z-index:300;width:228px;padding:20px;border-radius:16px;transition:opacity .3s,visibility .3s}
+.tweak-panel.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.grid-bg{background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:60px 60px}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#0a0a1e}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+@keyframes orb1{0%,100%{transform:translate(0,0)}33%{transform:translate(22px,-28px)}66%{transform:translate(-14px,18px)}}
+@keyframes orb2{0%,100%{transform:translate(0,0)}33%{transform:translate(-22px,22px)}66%{transform:translate(14px,-14px)}}
+@keyframes orb3{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,-18px)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes scrollPulse{0%,100%{opacity:.6}50%{opacity:1}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accent": "#a78bfa",
+  "accent2": "#ec4899",
+  "showBlog": true,
+  "showCertifications": true
+}/*EDITMODE-END*/;
+
+/* ── DATA ───────────────────────────────────────────── */
+
+const SKILLS=[
+  {icon:'fab fa-html5',name:'HTML',pct:80},{icon:'fab fa-css3-alt',name:'CSS',pct:70},
+  {icon:'fab fa-js-square',name:'JavaScript',pct:50},{icon:'fab fa-react',name:'React',pct:50},
+  {icon:'fab fa-angular',name:'Angular',pct:40},{icon:'fab fa-python',name:'Python',pct:50},
+  {icon:'fab fa-figma',name:'Figma',pct:80},{icon:'fab fa-bootstrap',name:'Bootstrap',pct:70},
+  {icon:'fas fa-database',name:'Database',pct:40},{icon:'fab fa-microsoft',name:'MS Office',pct:80},
+];
+const EXPERIENCE=[
+  {icon:'fas fa-briefcase',date:'May 2023 – Present',title:'Mentor',org:'Programáte Educamás, Colombia',desc:'Advise bootcamp students on code implementation, scrum methodology, web design and development.'},
+  {icon:'fas fa-briefcase',date:'Jan 2023 – Present',title:'CoFounder & Web Designer',org:'Webelopers, Colombia',desc:'Building web products collaboratively; primary interface designer using Figma.'},
+  {icon:'fas fa-briefcase',date:'Feb 2019 – Dec 2019',title:'Administrative Assistant',org:'Prochampions S.A.S., Colombia',desc:'Hiring support, documentation management, Siesa accounting system and SG-SST support.'},
+];
+const EDUCATION=[
+  {icon:'fas fa-graduation-cap',date:'Jan 2022 – Present',title:'Informatic Engineering',org:'Universidad de La Sabana, Colombia'},
+  {icon:'fas fa-graduation-cap',date:'Jun 2021 – Present',title:'Full Stack Web Developer',org:'Educamás – Programáte, Colombia'},
+  {icon:'fas fa-graduation-cap',date:'Dec 2020 – Jun 2021',title:'Diploma in Coding & Robotics',org:'Javeriana University – Samsung, Colombia'},
+  {icon:'fas fa-graduation-cap',date:'Jan 2020 – Jun 2021',title:'Business Administration',org:'University of The Areandina, Colombia'},
+  {icon:'fas fa-graduation-cap',date:'Jan 2018 – Aug 2019',title:'Technologist in Business Management',org:'SENA, Colombia'},
+];
+const CERTS=['Asincronismo en JavaScript — Platzi','C# Programación Orientada a Objetos','Frontend Developer Práctico — Platzi','Git & GitHub — Platzi','IA para Desarrolladores','Ingeniería de Software','Creación de Páginas Web'];
+const SERVICES=[
+  {icon:'fas fa-mobile-alt',title:'Responsive Design',desc:'Interfaces that adapt beautifully across all devices and screen sizes.'},
+  {icon:'fas fa-laptop-code',title:'Frontend Dev',desc:'Unique apps with fascinating and innovative user experiences.'},
+  {icon:'fas fa-code',title:'Backend Dev',desc:'Full server-side logic and capabilities for robust applications.'},
+  {icon:'fas fa-palette',title:'UI/UX Design',desc:'Interface design using Figma with solid design fundamentals.'},
+  {icon:'fas fa-robot',title:'AI Integration',desc:'Machine learning and AI-powered features for modern apps.'},
+  {icon:'fas fa-desktop',title:'Clean Code',desc:'Quality software delivered with the right project methodology.'},
+];
+const PROJECTS=[
+  {title:'Ferretería JF',cat:'design',tools:'Figma',date:'Oct 2023',url:'#'},
+  {title:'Portafolio Webelopers v2',cat:'design',tools:'Figma',date:'Oct 2023',url:'#'},
+  {title:'Colegio La Fuente',cat:'web-app',tools:'HTML, CSS, JS',date:'Nov 2023',url:'https://gemu03.github.io/LaFuente/'},
+  {title:'Sport Bar Panda FC',cat:'web-app',tools:'HTML, CSS, JS',date:'Sep 2023',url:'https://joseph8884.github.io/PandaSportBarMenu/'},
+  {title:'Videoclub CRUD',cat:'crud',tools:'Angular, Express, MySQL',date:'Nov 2021',url:'https://frontvideoclub.vercel.app/home'},
+  {title:'CRUD Mercatodo',cat:'crud',tools:'React, Django, MySQL',date:'Oct 2021',url:'https://mercatodocrud.netlify.app/'},
+  {title:'Chronometer',cat:'web-app',tools:'HTML, CSS, JS',date:'Jul 2021',url:'https://cronometro-js-omega.vercel.app/'},
+  {title:'Spline.design Test',cat:'design',tools:'HTML, Three.js, Spline',date:'Nov 2021',url:'https://prueba-spline.vercel.app/'},
+  {title:'Pokedex API',cat:'web-app',tools:'HTML, CSS, JS',date:'Jul 2021',url:'#'},
+  {title:'JS Challenges — 25 Retos',cat:'web-app',tools:'HTML, CSS, JS, Particles.js',date:'Aug 2021',url:'https://retos-js-ten.vercel.app/'},
+  {title:'Portfolio v1',cat:'web-app',tools:'HTML, CSS, JS, Particles.js',date:'Jul 2021',url:'#'},
+  {title:'Tribute Page',cat:'web-app',tools:'HTML, CSS, JS',date:'Jun 2021',url:'#'},
+];
+const TESTIMONIALS=[
+  {name:'Carlos Gómez',role:'Tech Lead, Webelopers',text:"John's dedication to learning and his eye for design make him invaluable. His Figma prototypes consistently impress clients on the first review."},
+  {name:'María Torres',role:'Bootcamp Graduate, Programáte',text:'Having John as a mentor was a game-changer. His patience and clear explanations helped me land my first developer job.'},
+  {name:'Diego Suárez',role:'Colleague, Universidad de La Sabana',text:'John combines business acumen with real technical skills. He understands both the product vision and the code to execute it.'},
+];
+const BLOG=[
+  {tag:'3D / WebGL',date:'Mar 2024',title:'Getting Started with Three.js',excerpt:'Building interactive 3D web experiences with Three.js and Spline.design — from setup to your first scene.'},
+  {tag:'Design',date:'Feb 2024',title:'Neumorphism vs Glassmorphism',excerpt:'A practical comparison of two dominant UI trends in 2024 — when and why to choose each aesthetic.'},
+  {tag:'Career',date:'Jan 2024',title:'From Business Admin to Full Stack',excerpt:'How I transitioned from business administration into web development and the lessons learned along the way.'},
+];
+
+/* ── HOOKS ──────────────────────────────────────────── */
+
+const useInView = () => {
+  const ref = React.useRef(null);
+  const [vis, setVis] = React.useState(false);
+  React.useEffect(() => {
+    if (!ref.current) return;
+    const obs = new IntersectionObserver(([e]) => { if(e.isIntersecting){setVis(true);obs.disconnect();} },{threshold:0.1});
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  },[]);
+  return [ref, vis];
+};
+
+/* ── SHARED ─────────────────────────────────────────── */
+
+const STitle = ({sub,title}) => (
+  <div style={{textAlign:'center',marginBottom:60}}>
+    <span className="s-sub">{sub}</span>
+    <h2 className="s-head grad-text">{title}</h2>
+  </div>
+);
+
+/* ── NAV ────────────────────────────────────────────── */
+
+const Nav = ({active}) => {
+  const [scrolled, setScrolled] = React.useState(false);
+  React.useEffect(()=>{
+    const fn = ()=>setScrolled(window.scrollY>60);
+    window.addEventListener('scroll',fn);
+    return ()=>window.removeEventListener('scroll',fn);
+  },[]);
+  return (
+    <nav className={`nav${scrolled?' scrolled':''}`}>
+      <div className="nav-inner">
+        <a href="#home" className="logo">JR</a>
+        <div className="nav-links">
+          {['home','about','skills','experience','services','portfolio','contact'].map(l=>
+            <a key={l} href={`#${l}`} className={active===l?'active':''}>{l}</a>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+/* ── HERO ───────────────────────────────────────────── */
+
+const Hero = () => {
+  const full = 'Web Developer & Business Administrator.';
+  const [typed, setTyped] = React.useState('');
+  React.useEffect(()=>{
+    let i=0;
+    const t=setInterval(()=>{ i++; setTyped(full.slice(0,i)); if(i>=full.length)clearInterval(t); },50);
+    return ()=>clearInterval(t);
+  },[]);
+  return (
+    <section id="home" className="grid-bg" style={{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',position:'relative',overflow:'hidden',paddingTop:80}}>
+      <div className="orb" style={{width:700,height:700,background:'radial-gradient(circle,rgba(251,131,158,.14) 0%,transparent 70%)',top:'-15%',right:'-10%',animation:'orb1 12s ease-in-out infinite'}}/>
+      <div className="orb" style={{width:600,height:600,background:'radial-gradient(circle,rgba(167,139,250,.12) 0%,transparent 70%)',bottom:'-10%',left:'-8%',animation:'orb2 16s ease-in-out infinite'}}/>
+      <div className="orb" style={{width:350,height:350,background:'radial-gradient(circle,rgba(56,189,248,.09) 0%,transparent 70%)',top:'40%',left:'38%',animation:'orb3 10s ease-in-out infinite'}}/>
+      <div className="container" style={{textAlign:'center',position:'relative',zIndex:1}}>
+        <p style={{color:'var(--muted)',fontSize:13,letterSpacing:'.2em',textTransform:'uppercase',marginBottom:20}}>Hello World</p>
+        <h2 style={{fontSize:76,fontWeight:800,lineHeight:1.05,marginBottom:18}}>
+          <span className="grad-text">I'm John Rojas</span>
+        </h2>
+        <h1 style={{fontSize:20,fontWeight:400,color:'var(--muted)',marginBottom:44,minHeight:30}}>
+          {typed}{typed.length<full.length&&<span style={{animation:'blink 1s step-end infinite'}}>|</span>}
+        </h1>
+        <div style={{display:'flex',gap:16,justifyContent:'center',flexWrap:'wrap'}}>
+          <a href="#about" className="btn btn-p">More About Me <i className="fas fa-arrow-right" style={{fontSize:12}}/></a>
+          <a href="#contact" className="btn btn-g">Contact Me</a>
+        </div>
+      </div>
+      <div style={{position:'absolute',bottom:36,left:'50%',transform:'translateX(-50%)',display:'flex',flexDirection:'column',alignItems:'center',gap:8}}>
+        <span style={{fontSize:10,color:'var(--muted)',letterSpacing:'.15em',textTransform:'uppercase'}}>Scroll</span>
+        <div style={{width:1,height:44,background:'linear-gradient(to bottom,var(--accent),transparent)',animation:'scrollPulse 2s ease-in-out infinite'}}/>
+      </div>
+    </section>
+  );
+};
+
+/* ── ABOUT ──────────────────────────────────────────── */
+
+const About = () => {
+  const [r1,v1]=useInView(); const [r2,v2]=useInView();
+  return (
+    <section id="about" className="section">
+      <div className="container">
+        <STitle sub="who i am" title="About Me"/>
+        <div style={{display:'flex',gap:36,alignItems:'flex-start',flexWrap:'wrap'}}>
+          <div ref={r1} className={`reveal${v1?' in':''}`} style={{flex:'0 0 300px'}}>
+            <div className="glass" style={{padding:24,marginBottom:16,textAlign:'center'}}>
+              <div style={{width:148,height:148,borderRadius:'50%',margin:'0 auto 18px',border:'2px solid var(--accent)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:48,fontWeight:800,color:'var(--accent)',background:'rgba(251,131,158,.06)',boxShadow:'0 0 30px rgba(251,131,158,.2)'}}>JR</div>
+              <h3 style={{fontSize:18,fontWeight:700,marginBottom:3}}>John J Rojas</h3>
+              <p style={{fontSize:13,color:'var(--muted)'}}>Bogotá, Colombia · @JohnJDev</p>
+            </div>
+            <div style={{display:'flex',justifyContent:'center',gap:10}}>
+              {[{i:'fab fa-github',u:'https://github.com/JohnRojas06289'},{i:'fab fa-linkedin-in',u:'https://co.linkedin.com/in/john-jairo-rojas-johnjdev'},{i:'fab fa-whatsapp',u:'https://wa.me/573212335821'}].map(s=>(
+                <a key={s.i} href={s.u} target="_blank" style={{width:42,height:42,borderRadius:'50%',border:'1px solid rgba(255,255,255,.1)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--muted)',fontSize:17,transition:'all .3s',textDecoration:'none'}}
+                  onMouseEnter={e=>{e.currentTarget.style.color='var(--accent)';e.currentTarget.style.borderColor='rgba(251,131,158,.5)';e.currentTarget.style.boxShadow='0 0 16px rgba(251,131,158,.2)'}}
+                  onMouseLeave={e=>{e.currentTarget.style.color='var(--muted)';e.currentTarget.style.borderColor='rgba(255,255,255,.1)';e.currentTarget.style.boxShadow='none'}}>
+                  <i className={s.i}/>
+                </a>
+              ))}
+            </div>
+          </div>
+          <div ref={r2} className={`reveal d1${v2?' in':''}`} style={{flex:1,minWidth:260}}>
+            <p style={{fontSize:17,lineHeight:'28px',color:'var(--text)',marginBottom:14}}>
+              <span style={{color:'var(--accent)',fontWeight:600}}>Hi! My name is John J Rojas.</span> I'm a web developer and computer engineering student at Universidad de La Sabana.
+            </p>
+            <p style={{fontSize:15,lineHeight:'26px',color:'var(--muted)',marginBottom:14}}>
+              I'm passionate about technology, design, and challenges. Currently mentoring at <span style={{color:'var(--accent)'}}>Programáte Educamás</span> and cofounding <span style={{color:'var(--accent)'}}>Webelopers</span>.
+            </p>
+            <p style={{fontSize:15,lineHeight:'26px',color:'var(--muted)',marginBottom:28}}>
+              My business administration background gives me a broader perspective — I understand both the product vision and the code to execute it.
+            </p>
+            <div style={{display:'flex',gap:12,flexWrap:'wrap',marginBottom:32}}>
+              <a href="#" className="btn btn-p" style={{fontSize:14}}>Download CV <i className="fas fa-download" style={{fontSize:12}}/></a>
+              <a href="#contact" className="btn btn-g" style={{fontSize:14}}>Hire Me</a>
+            </div>
+            <div style={{display:'flex',gap:14,flexWrap:'wrap'}}>
+              {[{n:'3+',l:'Years Coding'},{n:'12+',l:'Projects'},{n:'10+',l:'Technologies'},{n:'2+',l:'Yrs Mentoring'}].map(s=>(
+                <div key={s.l} className="glass" style={{flex:1,minWidth:80,padding:'14px 8px',textAlign:'center',borderRadius:12}}>
+                  <div style={{fontSize:22,fontWeight:800,color:'var(--accent)'}}>{s.n}</div>
+                  <div style={{fontSize:11,color:'var(--muted)',marginTop:3}}>{s.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ── SKILLS ─────────────────────────────────────────── */
+
+const Skills = () => {
+  const [ref,vis]=useInView();
+  return (
+    <section id="skills" className="section" style={{background:'rgba(255,255,255,.015)'}}>
+      <div className="container">
+        <STitle sub="what i know" title="My Skills"/>
+        <div ref={ref} style={{display:'flex',flexWrap:'wrap'}}>
+          {SKILLS.map((s,i)=>(
+            <div key={s.name} className={`reveal d${(i%4)+1}${vis?' in':''}`} style={{flex:'0 0 50%',maxWidth:'50%',padding:'0 20px',marginBottom:28}}>
+              <div style={{display:'flex',justifyContent:'space-between',marginBottom:10}}>
+                <div style={{display:'flex',alignItems:'center',gap:10,fontSize:14,color:'var(--text)',fontWeight:600}}>
+                  <i className={s.icon} style={{fontSize:22,color:'var(--accent)'}}/>{s.name}
+                </div>
+                <span style={{fontSize:13,color:'var(--accent)',fontWeight:700}}>{s.pct}%</span>
+              </div>
+              <div className="prog-track"><div className="prog-fill" style={{width:vis?`${s.pct}%`:'0%'}}/></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ── TIMELINE ───────────────────────────────────────── */
+
+const TimelineSection = ({id,sub,title,items,altBg}) => {
+  const [ref,vis]=useInView();
+  return (
+    <section id={id} className="section" style={altBg?{background:'rgba(255,255,255,.015)'}:{}}>
+      <div className="container">
+        <STitle sub={sub} title={title}/>
+        <div ref={ref} style={{position:'relative',maxWidth:880,margin:'0 auto'}}>
+          <div style={{position:'absolute',left:'50%',width:1,height:'100%',top:0,background:'linear-gradient(to bottom,transparent,var(--accent),var(--accent2),transparent)',opacity:.25}}/>
+          {items.map((item,i)=>(
+            <div key={i} className={`reveal d${(i%3)+1}${vis?' in':''}`}
+              style={{display:'flex',justifyContent:i%2===0?'flex-end':'flex-start',paddingRight:i%2===0?'calc(50% + 44px)':0,paddingLeft:i%2!==0?'calc(50% + 44px)':0,marginBottom:22,position:'relative'}}>
+              <div style={{position:'absolute',left:'50%',transform:'translateX(-50%)',width:34,height:34,borderRadius:'50%',border:'2px solid var(--accent)',background:'var(--bg)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent)',fontSize:13,top:16,zIndex:2,boxShadow:'0 0 14px rgba(251,131,158,.25)'}}>
+                <i className={item.icon}/>
+              </div>
+              <div className="glass" style={{padding:'20px 22px',borderRadius:14,maxWidth:310,width:'100%'}}>
+                <span style={{fontSize:12,fontWeight:700,color:'var(--accent)',display:'block',marginBottom:5}}>{item.date}</span>
+                <h3 style={{fontSize:15,fontWeight:700,color:'var(--text)',marginBottom:2}}>{item.title}</h3>
+                <h4 style={{fontSize:13,fontStyle:'italic',color:'var(--muted)',marginBottom:item.desc?8:0}}>{item.org}</h4>
+                {item.desc&&<p style={{fontSize:13,color:'var(--muted)',lineHeight:'21px'}}>{item.desc}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ── CERTIFICATIONS ─────────────────────────────────── */
+
+const Certifications = () => {
+  const [ref,vis]=useInView();
+  return (
+    <section id="certifications" className="section" style={{background:'rgba(255,255,255,.015)'}}>
+      <div className="container">
+        <STitle sub="credentials" title="Certifications"/>
+        <div ref={ref} style={{display:'flex',flexWrap:'wrap',gap:12,justifyContent:'center'}}>
+          {CERTS.map((c,i)=>(
+            <div key={c} className={`reveal glass d${(i%4)+1}${vis?' in':''}`} style={{padding:'12px 22px',borderRadius:30,fontSize:14,fontWeight:500,color:'var(--text)',display:'flex',alignItems:'center',gap:10}}>
+              <i className="fas fa-certificate" style={{color:'var(--accent)',fontSize:14}}/>{c}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ── SERVICES ───────────────────────────────────────── */
+
+const SvcCard = ({s,vis,delay}) => {
+  const [hov,setHov]=React.useState(false);
+  return (
+    <div className={`reveal d${delay}${vis?' in':''}`} style={{flex:'0 0 33.33%',maxWidth:'33.33%',padding:14}}>
+      <div className="glass" style={{padding:'34px 22px',textAlign:'center',height:'100%',transition:'all .3s',transform:hov?'translateY(-5px)':'none',boxShadow:hov?'0 20px 40px rgba(0,0,0,.3),0 0 28px rgba(251,131,158,.1)':'none'}}
+        onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)}>
+        <div style={{width:62,height:62,borderRadius:'50%',border:`1px solid ${hov?'rgba(251,131,158,.6)':'rgba(255,255,255,.1)'}`,margin:'0 auto 18px',display:'flex',alignItems:'center',justifyContent:'center',background:hov?'rgba(251,131,158,.1)':'transparent',transition:'all .3s',boxShadow:hov?'0 0 22px rgba(251,131,158,.2)':'none'}}>
+          <i className={s.icon} style={{fontSize:23,color:hov?'var(--accent)':'var(--muted)',transition:'color .3s'}}/>
+        </div>
+        <h3 style={{fontSize:16,fontWeight:700,color:'var(--text)',marginBottom:10}}>{s.title}</h3>
+        <p style={{fontSize:13,color:'var(--muted)',lineHeight:'21px'}}>{s.desc}</p>
+      </div>
+    </div>
+  );
+};
+const Services = () => {
+  const [ref,vis]=useInView();
+  return (
+    <section id="services" className="section">
+      <div className="container">
+        <STitle sub="what i offer" title="Services"/>
+        <div ref={ref} style={{display:'flex',flexWrap:'wrap'}}>
+          {SERVICES.map((s,i)=><SvcCard key={s.title} s={s} vis={vis} delay={(i%3)+1}/>)}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ── PORTFOLIO ──────────────────────────────────────── */
+
+const catCol={'web-app':'rgba(56,189,248,.13)','crud':'rgba(167,139,250,.13)','design':'rgba(251,131,158,.13)'};
+const catTx={'web-app':'#38bdf8','crud':'#a78bfa','design':'#fb839e'};
+
+const Portfolio = () => {
+  const [filter,setFilter]=React.useState('all');
+  const [ref,vis]=useInView();
+  const shown=filter==='all'?PROJECTS:PROJECTS.filter(p=>p.cat===filter);
+  return (
+    <section id="portfolio" className="section" style={{background:'rgba(255,255,255,.015)'}}>
+      <div className="container">
+        <STitle sub="my work" title="Latest Projects"/>
+        <div style={{display:'flex',justifyContent:'center',gap:8,marginBottom:40,flexWrap:'wrap'}}>
+          {['all','web-app','crud','design'].map(f=>(
+            <button key={f} className={`chip${filter===f?' active':''}`} onClick={()=>setFilter(f)}>{f}</button>
+          ))}
+        </div>
+        <div ref={ref} style={{display:'flex',flexWrap:'wrap',margin:'0 -10px'}}>
+          {shown.map((p,i)=>(
+            <div key={p.title} className={`reveal d${(i%3)+1}${vis?' in':''}`} style={{flex:'0 0 33.33%',maxWidth:'33.33%',padding:10}}>
+              <div className="glass proj-card" style={{borderRadius:14,overflow:'hidden'}}>
+                <div style={{paddingBottom:'58%',position:'relative',background:catCol[p.cat]||'rgba(255,255,255,.04)'}}>
+                  <div style={{position:'absolute',inset:0,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:10}}>
+                    <div style={{width:40,height:40,borderRadius:'50%',background:catTx[p.cat]||'var(--accent)',opacity:.2}}/>
+                    <span className="tag" style={{background:'rgba(0,0,0,.35)',color:catTx[p.cat]||'var(--accent)'}}>{p.cat}</span>
+                  </div>
+                </div>
+                <div style={{padding:'16px 18px'}}>
+                  <h3 style={{fontSize:14,fontWeight:700,color:'var(--text)',marginBottom:5}}>{p.title}</h3>
+                  <p style={{fontSize:12,color:'var(--muted)',marginBottom:10}}>{p.tools} · {p.date}</p>
+                  <a href={p.url} target="_blank" style={{fontSize:12,color:'var(--accent)',textDecoration:'none',fontWeight:600,display:'inline-flex',alignItems:'center',gap:5}}>
+                    View <i className="fas fa-external-link-alt" style={{fontSize:10}}/>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ── TESTIMONIALS ───────────────────────────────────── */
+
+const Testimonials = () => {
+  const [idx,setIdx]=React.useState(0);
+  React.useEffect(()=>{
+    const t=setInterval(()=>setIdx(i=>(i+1)%TESTIMONIALS.length),6000);
+    return ()=>clearInterval(t);
+  },[]);
+  const t=TESTIMONIALS[idx];
+  return (
+    <section id="testimonials" className="section">
+      <div className="container">
+        <STitle sub="what people say" title="Testimonials"/>
+        <div style={{maxWidth:660,margin:'0 auto',textAlign:'center'}}>
+          <div className="glass" style={{padding:'44px 40px',borderRadius:20,position:'relative',minHeight:220}}>
+            <i className="fas fa-quote-left" style={{fontSize:26,color:'var(--accent)',opacity:.22,position:'absolute',top:22,left:26}}/>
+            <p style={{fontSize:16,color:'var(--text)',lineHeight:'28px',marginBottom:28,fontStyle:'italic'}}>"{t.text}"</p>
+            <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:14}}>
+              <div style={{width:46,height:46,borderRadius:'50%',border:'2px solid var(--accent)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:19,fontWeight:800,color:'var(--accent)',background:'rgba(251,131,158,.07)'}}>{t.name[0]}</div>
+              <div style={{textAlign:'left'}}>
+                <div style={{fontWeight:700,color:'var(--text)',fontSize:14}}>{t.name}</div>
+                <div style={{fontSize:12,color:'var(--muted)'}}>{t.role}</div>
+              </div>
+            </div>
+            <i className="fas fa-quote-right" style={{fontSize:26,color:'var(--accent)',opacity:.22,position:'absolute',bottom:22,right:26}}/>
+          </div>
+          <div style={{display:'flex',justifyContent:'center',gap:8,marginTop:20}}>
+            {TESTIMONIALS.map((_,i)=>(
+              <button key={i} onClick={()=>setIdx(i)} style={{width:i===idx?24:8,height:8,borderRadius:4,background:i===idx?'var(--accent)':'rgba(255,255,255,.15)',border:'none',cursor:'pointer',transition:'all .3s',padding:0}}/>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ── BLOG ───────────────────────────────────────────── */
+
+const Blog = () => {
+  const [ref,vis]=useInView();
+  return (
+    <section id="blog" className="section" style={{background:'rgba(255,255,255,.015)'}}>
+      <div className="container">
+        <STitle sub="thoughts & writing" title="Blog"/>
+        <div ref={ref} style={{display:'flex',gap:22,flexWrap:'wrap'}}>
+          {BLOG.map((b,i)=>(
+            <div key={b.title} className={`reveal glass d${i+1}${vis?' in':''}`} style={{flex:1,minWidth:240,borderRadius:16,padding:'26px 22px',cursor:'pointer',transition:'transform .3s'}}
+              onMouseEnter={e=>e.currentTarget.style.transform='translateY(-5px)'}
+              onMouseLeave={e=>e.currentTarget.style.transform='none'}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14}}>
+                <span className="tag" style={{background:'rgba(251,131,158,.1)',color:'var(--accent)'}}>{b.tag}</span>
+                <span style={{fontSize:12,color:'var(--muted)'}}>{b.date}</span>
+              </div>
+              <h3 style={{fontSize:16,fontWeight:700,color:'var(--text)',marginBottom:10,lineHeight:'23px'}}>{b.title}</h3>
+              <p style={{fontSize:13,color:'var(--muted)',lineHeight:'21px',marginBottom:18}}>{b.excerpt}</p>
+              <span style={{fontSize:13,color:'var(--accent)',fontWeight:600}}>Read more →</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ── CONTACT ────────────────────────────────────────── */
+
+const Contact = () => {
+  const [form,setForm]=React.useState({name:'',email:'',subject:'',msg:''});
+  const [ref,vis]=useInView();
+  const up=k=>e=>setForm(f=>({...f,[k]:e.target.value}));
+  return (
+    <section id="contact" className="section">
+      <div className="container">
+        <STitle sub="get in touch" title="Contact Me"/>
+        <div ref={ref} style={{display:'flex',gap:26,flexWrap:'wrap',alignItems:'flex-start'}}>
+          <div className={`reveal${vis?' in':''}`} style={{flex:'0 0 260px',display:'flex',flexDirection:'column',gap:14}}>
+            {[{i:'fas fa-phone-alt',l:'Phone',v:'+57 321 233 5821'},{i:'fas fa-envelope',l:'Email',v:'john@johnjdev.com'},{i:'fas fa-map-marker-alt',l:'Location',v:'Bogotá, Colombia'}].map(c=>(
+              <div key={c.l} className="glass" style={{padding:'20px 18px',borderRadius:14,display:'flex',alignItems:'center',gap:14}}>
+                <div style={{width:42,height:42,borderRadius:'50%',border:'1px solid rgba(251,131,158,.3)',display:'flex',alignItems:'center',justifyContent:'center',color:'var(--accent)',fontSize:17,flexShrink:0}}><i className={c.i}/></div>
+                <div>
+                  <div style={{fontSize:11,color:'var(--muted)',marginBottom:2,textTransform:'uppercase',letterSpacing:'.08em'}}>{c.l}</div>
+                  <div style={{fontSize:14,color:'var(--text)',fontWeight:500}}>{c.v}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className={`reveal d1 glass${vis?' in':''}`} style={{flex:1,minWidth:280,padding:'28px 26px',borderRadius:20}}>
+            <div style={{display:'flex',gap:14,marginBottom:14,flexWrap:'wrap'}}>
+              <input className="inp" style={{flex:1,minWidth:130}} placeholder="Your Name" value={form.name} onChange={up('name')}/>
+              <input className="inp" style={{flex:1,minWidth:130}} placeholder="Email Address" value={form.email} onChange={up('email')}/>
+            </div>
+            <input className="inp" style={{marginBottom:14}} placeholder="Subject" value={form.subject} onChange={up('subject')}/>
+            <textarea className="inp" style={{minHeight:120,resize:'vertical',paddingTop:14,display:'block',marginBottom:18}} placeholder="Your Message" value={form.msg} onChange={up('msg')}/>
+            <button className="btn btn-p" style={{width:'100%',justifyContent:'center'}}>
+              Send Message <i className="fas fa-paper-plane" style={{fontSize:13}}/>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ── FOOTER ─────────────────────────────────────────── */
+
+const Footer = () => (
+  <footer style={{borderTop:'1px solid rgba(255,255,255,.06)',padding:'28px 0',textAlign:'center'}}>
+    <div className="container">
+      <p style={{fontSize:14,color:'var(--muted)'}}>© 2024 <span style={{color:'var(--accent)'}}>JohnJDev</span> — John J Rojas. All rights reserved.</p>
+    </div>
+  </footer>
+);
+
+/* ── TWEAKS ─────────────────────────────────────────── */
+
+const SKINS=[
+  {n:'Rose Pink',a:'#fb839e',b:'#a78bfa'},{n:'Sky Blue',a:'#38bdf8',b:'#818cf8'},
+  {n:'Emerald',a:'#34d399',b:'#38bdf8'},{n:'Amber',a:'#fbbf24',b:'#fb923c'},
+  {n:'Violet',a:'#a78bfa',b:'#ec4899'},
+];
+const TweaksPanel = ({tweaks,setTweaks,show}) => (
+  <div className={`tweak-panel glass${show?'':' hidden'}`}>
+    <div style={{fontSize:13,fontWeight:700,color:'var(--text)',marginBottom:14}}>Tweaks</div>
+    <div style={{fontSize:11,color:'var(--muted)',marginBottom:8,textTransform:'uppercase',letterSpacing:'.08em'}}>Accent Color</div>
+    <div style={{display:'flex',flexWrap:'wrap',gap:8,marginBottom:16}}>
+      {SKINS.map(s=>(
+        <button key={s.n} title={s.n} onClick={()=>setTweaks(t=>({...t,accent:s.a,accent2:s.b}))}
+          style={{width:28,height:28,borderRadius:'50%',border:tweaks.accent===s.a?'2px solid #fff':'2px solid transparent',background:`linear-gradient(135deg,${s.a},${s.b})`,cursor:'pointer',transition:'all .2s',transform:tweaks.accent===s.a?'scale(1.18)':'scale(1)'}}/>
+      ))}
+    </div>
+    <div style={{fontSize:11,color:'var(--muted)',marginBottom:8,textTransform:'uppercase',letterSpacing:'.08em'}}>Sections</div>
+    {[['showBlog','Blog'],['showCertifications','Certifications']].map(([k,l])=>(
+      <label key={k} style={{display:'flex',alignItems:'center',gap:10,marginBottom:8,cursor:'pointer'}} onClick={()=>setTweaks(t=>({...t,[k]:!t[k]}))}>
+        <div style={{width:36,height:20,borderRadius:10,background:tweaks[k]?'var(--accent)':'rgba(255,255,255,.1)',position:'relative',transition:'all .3s'}}>
+          <div style={{position:'absolute',top:3,left:tweaks[k]?18:3,width:14,height:14,borderRadius:'50%',background:'#fff',transition:'left .3s'}}/>
+        </div>
+        <span style={{fontSize:13,color:'var(--muted)'}}>{l}</span>
+      </label>
+    ))}
+  </div>
+);
+
+/* ── APP ────────────────────────────────────────────── */
+
+const SAVED = JSON.parse(localStorage.getItem('jjdev_tweaks')||'null') || TWEAK_DEFAULTS;
+
+function App() {
+  const [tweaks,setTweaks]=React.useState(SAVED);
+  const [active,setActive]=React.useState('home');
+  const [editMode,setEditMode]=React.useState(false);
+
+  React.useEffect(()=>{
+    document.documentElement.style.setProperty('--accent',tweaks.accent);
+    document.documentElement.style.setProperty('--accent2',tweaks.accent2||'#a78bfa');
+    localStorage.setItem('jjdev_tweaks',JSON.stringify(tweaks));
+    window.parent.postMessage({type:'__edit_mode_set_keys',edits:tweaks},'*');
+  },[tweaks]);
+
+  React.useEffect(()=>{
+    const handler=e=>{
+      if(e.data?.type==='__activate_edit_mode') setEditMode(true);
+      if(e.data?.type==='__deactivate_edit_mode') setEditMode(false);
+    };
+    window.addEventListener('message',handler);
+    window.parent.postMessage({type:'__edit_mode_available'},'*');
+    return ()=>window.removeEventListener('message',handler);
+  },[]);
+
+  React.useEffect(()=>{
+    const ids=['home','about','skills','experience','education','certifications','services','portfolio','testimonials','blog','contact'];
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) setActive(e.target.id); });
+    },{rootMargin:'-40% 0px -55% 0px'});
+    ids.forEach(id=>{ const el=document.getElementById(id); if(el) obs.observe(el); });
+    return ()=>obs.disconnect();
+  },[]);
+
+  return (
+    <div>
+      <Nav active={active}/>
+      <Hero/>
+      <About/>
+      <Skills/>
+      <TimelineSection id="experience" sub="where i've worked" title="Experience" items={EXPERIENCE}/>
+      <TimelineSection id="education" sub="my academic path" title="Education" items={EDUCATION} altBg/>
+      {tweaks.showCertifications && <Certifications/>}
+      <Services/>
+      <Portfolio/>
+      <Testimonials/>
+      {tweaks.showBlog && <Blog/>}
+      <Contact/>
+      <Footer/>
+      <TweaksPanel tweaks={tweaks} setTweaks={setTweaks} show={editMode}/>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+/* ── Keyframes ── */
+@keyframes float     { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-14px)} }
+@keyframes pulse-orb { 0%,100%{opacity:.45;filter:blur(70px)} 50%{opacity:.75;filter:blur(50px)} }
+@keyframes spin-slow { to{transform:rotate(360deg)} }
+@keyframes grad-pan  { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+@keyframes blink     { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes scroll-ln { 0%{transform:scaleY(0);transform-origin:top}
+                       45%{transform:scaleY(1);transform-origin:top}
+                       55%{transform:scaleY(1);transform-origin:bottom}
+                      100%{transform:scaleY(0);transform-origin:bottom} }
+@keyframes loader-fill { from{width:0} to{width:100%} }
+@keyframes fade-up   { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+@keyframes slide-in-left  { from{opacity:0;transform:translateX(-60px)} to{opacity:1;transform:translateX(0)} }
+@keyframes slide-in-right { from{opacity:0;transform:translateX(60px)}  to{opacity:1;transform:translateX(0)} }
+@keyframes char-reveal { from{opacity:0;transform:translateY(110%) rotate(4deg)} to{opacity:1;transform:translateY(0) rotate(0)} }
+
+/* ── Loader ── */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg-0);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2rem;
+  transition: opacity .6s var(--ease-out), visibility .6s;
+}
+#loader.out { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.loader-logo {
+  font-family: var(--ff-display);
+  font-size: 3.5rem; font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: float 2s ease-in-out infinite;
+}
+.loader-bar {
+  width: 180px; height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 1px; overflow: hidden;
+}
+.loader-fill {
+  height: 100%;
+  background: var(--grad);
+  border-radius: 1px;
+  animation: loader-fill 1.6s var(--ease-out) forwards;
+}
+.loader-text {
+  font-size: 0.72rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--t4);
+}
+
+/* ── Custom cursor ── */
+#cur-dot {
+  position: fixed; top: 0; left: 0;
+  width: 7px; height: 7px;
+  background: var(--pk);
+  border-radius: 50%; pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: background .2s, width .2s, height .2s;
+}
+#cur-ring {
+  position: fixed; top: 0; left: 0;
+  width: 34px; height: 34px;
+  border: 1.5px solid rgba(124,58,237,.55);
+  border-radius: 50%; pointer-events: none; z-index: 9997;
+  transform: translate(-50%,-50%);
+  transition: width .3s var(--ease-out), height .3s var(--ease-out),
+              border-color .3s, background .3s;
+}
+#cur-ring.hovered {
+  width: 54px; height: 54px;
+  background: rgba(124,58,237,.1);
+  border-color: var(--v1);
+}
+@media (pointer:coarse) { #cur-dot, #cur-ring { display:none; } }
+
+/* ── Background orbs ── */
+.bg-orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.orb { position: absolute; border-radius: 50%; filter: blur(80px); animation: pulse-orb 7s ease-in-out infinite; }
+.orb-1 { width:650px;height:650px; background:rgba(124,58,237,.13); top:-200px;left:-200px; }
+.orb-2 { width:500px;height:500px; background:rgba(236,72,153,.09); bottom:5%;right:-100px; animation-delay:3.5s; }
+.orb-3 { width:350px;height:350px; background:rgba(6,182,212,.07);  top:50%;left:50%;
+          transform:translate(-50%,-50%); animation-delay:1.8s; }
+
+/* ── GSAP reveal seeds (initial state) ── */
+.will-reveal        { opacity: 0; }
+.will-reveal-left   { opacity: 0; transform: translateX(-60px); }
+.will-reveal-right  { opacity: 0; transform: translateX(60px); }
+.will-reveal-up     { opacity: 0; transform: translateY(50px); }
+.will-scale         { opacity: 0; transform: scale(0.88); }
